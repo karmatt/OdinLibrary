@@ -8,73 +8,48 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&display=swap"
       rel="stylesheet"
     />
     <script
-      src="https://kit.fontawesome.com/41881099c8.js"
+      src="https://kit.fontawesome.com/4a8ecd38fb.js"
       crossorigin="anonymous"
     ></script>
-    <script src="./js/app.js" defer></script>
+    <script src="./js/app.js" type="module" defer></script>
     <title>Odin | Library</title>
   </head>
   <body>
-    <header class="header">
-      <div class="container">
-        <h1 class="header__logo">Void Library</h1>
-        <button class="btn">+ Add Book</button>
-      </div>
-    </header>
-    <main class="main">
-      <div class="container">
-        <div class="library">
-          <div class="library__book" data-index="0">
-            <div class="book__content">
-              <h1 class="book__title">"IT"</h1>
-              <h3 class="book__author">Stephen King</h3>
-              <p class="book__pages">1,138 pages</p>
-              <div class="btn-group">
-                <button class="btn" data-read="false">Not Read</button>
-                <button class="btn">Remove</button>
-              </div>
-            </div>
-          </div>
-          <div class="library__book" data-index="1">
-            <div class="book__content">
-              <h1 class="book__title">"Fahrenheit 451"</h1>
-              <h3 class="book__author">Ray Bradbury</h3>
-              <p class="book__pages">256 pages</p>
-              <div class="btn-group">
-                <button class="btn" data-read="true">Read</button>
-                <button class="btn">Remove</button>
-              </div>
-            </div>
-          </div>
-          <div class="library__book" data-index="2">
-            <div class="book__content">
-              <h1 class="book__title">"The Fifty Year Sword"</h1>
-              <h3 class="book__author">Mark Z. Danielewski</h3>
-              <p class="book__pages">100 pages</p>
-              <div class="btn-group">
-                <button class="btn" data-read="true">Read</button>
-                <button class="btn">Remove</button>
-              </div>
-            </div>
-          </div>
+    <div class="page-wrapper">
+      <header class="header">
+        <div class="container">
+          <h1 class="header__logo">Void Library</h1>
+          <button class="btn btn--cta">
+            <i class="fa-solid fa-square-plus fa-lg" aria-hidden="true"></i> Add
+            Book
+          </button>
         </div>
-      </div>
-    </main>
-    <footer class="footer">
-      <div class="container">
-        <h2 class="footer__logo">Void Library</h2>
-        <p class="footer__copyright">
-          &copy; 2022 Ironwell Designs
-          <span class="fa-brands fa-github-alt"></span>
-        </p>
-      </div>
-    </footer>
-    <div class="modal-overlay" data-overlay-hidden="true"></div>
-    <div class="add-book-modal" data-modal-hidden="true">
+      </header>
+      <main class="main">
+        <div class="container">
+          <div class="library"></div>
+        </div>
+      </main>
+      <footer class="footer">
+        <div class="container">
+          <h2 class="footer__logo">Void Library</h2>
+          <p class="footer__copyright">
+            &copy; 2022 Ironwell Designs
+            <a
+              class="fa-brands fa-github-alt fa-lg"
+              href="https://github.com/karmatt/OdinLibrary"
+              target="_blank"
+            ></a>
+          </p>
+        </div>
+      </footer>
+    </div>
+    <div class="modal-overlay" data-hidden="true"></div>
+    <div class="add-book-modal" data-hidden="true">
       <div class="modal__content">
         <form class="modal__form">
           <h3 class="form__title">Add New Book</h3>
@@ -83,8 +58,7 @@
             <input
               type="text"
               name="book-title"
-              id="book-title"
-              placeholder="Title"
+              class="book-input book-title"
               required
             />
           </div>
@@ -93,8 +67,7 @@
             <input
               type="text"
               name="book-author"
-              id="book-author"
-              placeholder="Author"
+              class="book-input book-author"
               required
             />
           </div>
@@ -103,15 +76,15 @@
             <input
               type="number"
               name="book-pages"
-              id="book-author"
               min="1"
               value="1"
+              class="book-input book-pages"
               required
             />
           </div>
-          <div class="form__did-read">
-            <label for="did-read">Have you read this?</label>
-            <input type="checkbox" name="did-read" id="did-read" />
+          <div class="form__input-group form__input-group--row">
+            <label for="book-read">Have you read this?</label>
+            <input type="checkbox" name="book-read" class="book-read" />
           </div>
           <button type="submit" class="btn btn--cta">Submit</button>
         </form>
