@@ -10,6 +10,7 @@ const titleInput = addBookModal.querySelector(".book-title");
 const authorInput = addBookModal.querySelector(".book-author"); 
 const pagesInput = addBookModal.querySelector(".book-pages");
 const didReadInput = addBookModal.querySelector(".book-read");
+const addBookForm = addBookModal.querySelector(".modal__form");
 const formSubmit = addBookModal.querySelector(".btn[type=submit]");
 const library = new Library();
 
@@ -27,9 +28,16 @@ const createBook = () => {
 }
 const createLibrary = () => {
   resetGrid();
-  library.books.forEach((book, index) => {
+  library.books.forEach(book => {
     const bookCard = createBookCard(book);
     bookGrid.appendChild(bookCard.card);
+    bookCard.readButton.addEventListener("click", (event) => {
+      book.status = !book.status;
+      event.target.setAttribute("data-read", book.status);
+      event.target.innerText = book.status === true ? "Read" : "Not Read"
+      saveLibrary();
+
+    });
     bookCard.removeButton.addEventListener("click", removeBook);
   });
 }
@@ -39,14 +47,27 @@ const resetGrid = () => {
   }
 }
 const clearForm = () => {
-  titleInput.value = "";
-  authorInput.value = "";
-  pagesInput.valueAsNumber = pagesInput.min;
-  didReadInput.checked = false;
+  addBookForm.reset();
 }
 const removeBook = (book) => {
   library.remove(book);
+  saveLibrary()
   createLibrary();
+}
+const saveLibrary = () => {
+  if (localStorage.getItem("library") !== null) { 
+    localStorage.setItem("library", JSON.stringify(library.books)); 
+  }
+}
+const restoreLibrary = () => {
+  if (localStorage.getItem("library") !== null) {
+    const object = localStorage.getItem("library");
+    const books = JSON.parse(object)
+    library.books = books.map(book => { return new Book(book.title, book.author, book.pages, book.status); })
+    createLibrary()
+  } else {
+    createLibrary()
+  }
 }
 addBookBtn.addEventListener("click", () => {
   toggleHidden(overlay);
@@ -60,9 +81,10 @@ formSubmit.addEventListener("click", (event) => {
   event.preventDefault();
   let newBook = createBook();
   library.add(newBook);
+  saveLibrary()
   createLibrary();
   clearForm();
   toggleHidden(overlay);
   toggleHidden(addBookModal);
 });
-
+restoreLibrary();

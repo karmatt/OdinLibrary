@@ -29,10 +29,10 @@ export const createBookCard = (book) => {
   card.appendChild(bookPages);
   card.appendChild(buttonGroup);
 
-  readButton.addEventListener("click", () => {
-    book.status = !book.status
-    readButton.setAttribute("data-read", book.status)
-    readButton.innerText = book.status === true ? "Read" : "Not Read"
-  });
-  return { card, removeButton };
+  // readButton.addEventListener("click", () => {
+  //   book.status = !book.status
+  //   readButton.setAttribute("data-read", book.status)
+  //   readButton.innerText = book.status === true ? "Read" : "Not Read"
+  // });
+  return { card, readButton, removeButton };
 };
