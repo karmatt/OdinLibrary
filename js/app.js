@@ -55,9 +55,7 @@ const removeBook = (book) => {
   createLibrary();
 }
 const saveLibrary = () => {
-  if (localStorage.getItem("library") !== null) { 
-    localStorage.setItem("library", JSON.stringify(library.books)); 
-  }
+    localStorage.setItem("library", JSON.stringify(library.books));
 }
 const restoreLibrary = () => {
   if (localStorage.getItem("library") !== null) {
